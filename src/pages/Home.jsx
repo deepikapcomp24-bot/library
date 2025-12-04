@@ -1,47 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const [books, setBooks] = useState([]);
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    fetch("http://localhost:5000/books")  // Your API
-      .then((res) => res.json())
-      .then((data) => {
-        // Show only latest 20 books
-        setBooks(data.slice(0, 20));
-      })
-      .catch((err) => console.error("Error fetching books:", err));
-  }, []);
+  // Generate 20 sample books
+  const books = Array.from({ length: 20 }, (_, i) => ({
+    id: i + 1,
+    title: `Book Title ${i + 1}`,
+    author: `Author ${i + 1}`,
+    year: 2000 + i,
+    genre: "Fiction",
+    isbn: `ISBN${10000 + i}`
+  }))
+  // Navigate to book details page
+  const handleRowClick = (id) => {
+    navigate(`/book/${id}`);
+  }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-2xl font-bold mb-4 text-center">Newest Books</h1>
+    <div className="home-container">
+      <h2>Newest 20 Books</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <table className="book-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Genre</th>
+            <th>ISBN</th>
+          </tr>
+        </thead>
 
-        {books.map((book) => (
-          <Link
-            to={`/book/${book.id}`}
-            key={book.id}
-            className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition"
-          >
-            <img
-              src={book.image}
-              alt={book.title}
-              className="h-48 w-full object-cover rounded mb-3"
-            />
-
-            <h2 className="text-lg font-semibold">{book.title}</h2>
-            <p className="text-sm text-gray-600">by {book.author}</p>
-
-            <p className="mt-2 text-sm text-blue-600">View Details →</p>
-          </Link>
-        ))}
-
-      </div>
+        <tbody>
+          {books.map((book) => (
+            <tr
+              key={book.id}
+              onClick={() => handleRowClick(book.id)}
+              style={{ cursor: "pointer" }}
+            >
+              <td>{book.id}</td>
+              <td>{book.title}</td>
+              <td>{book.author}</td>
+              <td>{book.year}</td>
+              <td>{book.genre}</td>
+              <td>{book.isbn}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
