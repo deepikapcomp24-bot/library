@@ -12,7 +12,7 @@ const Login = () => {
     console.log({ username, email, password });
 
     // Redirect to home page
-    navigate('/login');
+    navigate('/home');
   };
 
   return (
