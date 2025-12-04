@@ -3,6 +3,8 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import { BrowserRouter,Routes,Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
+import BookDetails from './pages/BookDetails'
+
 
 import './App.css';
 
@@ -23,7 +25,7 @@ const App = () => {
       
       
      
-      <Route path='/Book/:id'element={<singlebook/>} />
+      <Route path='/Book/:id'element={<BookDetails/>} />
       
 
 
