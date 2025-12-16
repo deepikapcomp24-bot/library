@@ -16,17 +16,32 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg">
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      style={{
+        backgroundImage:
+          "url('https://public-files.gumroad.com/mg9w28eqy8qlg3pwefm0lbrbmvkn')",
+          backgroundSize: "100%", // Resize image to 80% of container
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  
+      }}
+    >
+       
+      {/* Optional dark overlay */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+
+      {/* Form container with higher z-index */}
+      <div className="relative max-w-md w-full space-y-8 bg-white bg-opacity-90 p-10 rounded-xl shadow-lg z-10">
         <div>
+
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to Bookstore
+            Login to Bookstore
           </h2>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="rounded-md shadow-sm -space-y-px">
-
             <div>
               <input
                 type="text"
@@ -63,13 +78,27 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded"
+            className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition"
           >
-            Sign in
+            Login
           </button>
+
+          {/* Create Account Link */}
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{' '}
+              <Link
+                to="/register"
+                className="text-indigo-600 hover:text-indigo-800 font-medium"
+              >
+                Create Account
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>
+    
   );
 };
 
